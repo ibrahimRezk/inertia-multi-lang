@@ -31,29 +31,41 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    
+
     Route::get('/dashboard', function () {
         $post = Post::find(1);
-        // App::setLocale('en');
         $locale = App::getLocale();
 
-        return Inertia::render('Dashboard',[
-            'name' =>$post->name,
+
+        return Inertia::render('Dashboard', [
+            'name' => $post->name,
             'locale' => $locale
         ]);
     })->name('dashboard');
 
-    Route::get('/dashboard2/{locale}', function ($locale) {
+    Route::get('/dashboard2', function () {
+        $post = Post::find(1);
+        $locale = App::getLocale();
+
+
+        return Inertia::render('Dashboard2', [
+            'name' => $post->name,
+            'locale' => $locale
+        ]);
+    })->name('dashboard2');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+    Route::get('/lang/{locale}/{currentPage}', function ($locale, $currentPage) {
         $post = Post::find(1);
         App::setLocale($locale);
         $locale = App::getLocale();
 
-        // return redirect()->back(); // not working
-
-        return Inertia::render('Dashboard',[
-            'name' =>$post->name,
+        return Inertia::render($currentPage, [
+            'name' => $post->name,
             'locale' => $locale
         ]);
-    })->name('dashboard2');
-    // remember we are in the same page dashboard but url is different to call the locale , later we can make it as main route with closure of all other routes like mcamara :)
+    })->name('lang');
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 });
