@@ -17,7 +17,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -32,36 +32,34 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/dashboard', function () {
-        $post = Post::find(1);
-        $locale = App::getLocale();
+    // Route::get('/dashboard', function () {
+    //     $post = Post::find(1);
+    //     $locale = App::getLocale();
 
 
-        return Inertia::render('Dashboard', [
-            'name' => $post->name,
-            'locale' => $locale
-        ]);
-    })->name('dashboard');
+    //     return Inertia::render('Dashboard', [
+    //         'name' => $post->name,
+    //         'locale' => $locale
+    //     ]);
+    // })->name('dashboard');
 
-    Route::get('/dashboard2', function () {
-        $post = Post::find(1);
-        $locale = App::getLocale();
-
-
-        return Inertia::render('Dashboard2', [
-            'name' => $post->name,
-            'locale' => $locale
-        ]);
-    })->name('dashboard2');
+    // Route::get('/dashboard2', function () {
+    //     $post = Post::find(1);
+    //     $locale = App::getLocale();
 
 
+    //     return Inertia::render('Dashboard2', [
+    //         'name' => $post->name,
+    //         'locale' => $locale
+    //     ]);
+    // })->name('dashboard2');
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('/lang/{locale}/{currentPage}', function ($locale, $currentPage) {
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    Route::get('/{locale}/{currentPage}', function ($locale, $currentPage) {
         $post = Post::find(1);
         App::setLocale($locale);
-        $locale = App::getLocale();
-
         return Inertia::render($currentPage, [
             'name' => $post->name,
             'locale' => $locale
