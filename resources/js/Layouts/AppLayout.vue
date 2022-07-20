@@ -8,7 +8,7 @@ import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 ///////////////////////////////////////////////////////////////////
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { trans } from "laravel-vue-i18n";
 import { getActiveLanguage } from "laravel-vue-i18n";
 import { usePage } from "@inertiajs/inertia-vue3";
@@ -18,13 +18,12 @@ import { loadLanguageAsync } from "laravel-vue-i18n";
 defineProps({
     title: String,
 });
-
 //////////////////////////////////////////////////////////////////////////////////////
 const currentPage = usePage().component.value;
 watch(
     () => trans("sitelang"),
     () => {
-        console.log("hi");
+
         const lang = getActiveLanguage();
         Inertia.get(route("lang", [lang, currentPage]));
     }
@@ -74,17 +73,21 @@ const logout = () => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+                            
                                 <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                                <JetNavLink :href="route('lang', [$page.props.locale, 'Dashboard'])"
-                                :active="route().current('lang', [$page.props.locale, 'Dashboard'])">
+                                <JetNavLink :href="route('dashboard')"
+                                :active="route().current('dashboard')">
                                     Dashboard 1
                                 </JetNavLink>
 
-                                <JetNavLink :href="route('lang', [$page.props.locale, 'Dashboard2'])" 
-                                :active="route().current('lang', [$page.props.locale, 'Dashboard2'])">
+                                <JetNavLink :href="route('dashboard2')" 
+                                :active="route().current('dashboard2')">
                                     Dashboard 2
                                 </JetNavLink>
                                 <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
 
                                 <button @click="loadLanguageAsync('ar')">العربية</button>
                                 <br />

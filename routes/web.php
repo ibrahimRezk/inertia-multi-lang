@@ -32,27 +32,27 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    // Route::get('/dashboard', function () {
-    //     $post = Post::find(1);
-    //     $locale = App::getLocale();
+    Route::get('/dashboard', function () {
+        $post = Post::find(1);
+        $locale = App::getLocale();
 
 
-    //     return Inertia::render('Dashboard', [
-    //         'name' => $post->name,
-    //         'locale' => $locale
-    //     ]);
-    // })->name('dashboard');
+        return Inertia::render('Dashboard', [
+            'name' => $post->name,
+            'locale' => $locale
+        ]);
+    })->name('dashboard')->middleware('Lang');
 
-    // Route::get('/dashboard2', function () {
-    //     $post = Post::find(1);
-    //     $locale = App::getLocale();
+    Route::get('/dashboard2', function () {
+        $post = Post::find(1);
+        $locale = App::getLocale();
 
 
-    //     return Inertia::render('Dashboard2', [
-    //         'name' => $post->name,
-    //         'locale' => $locale
-    //     ]);
-    // })->name('dashboard2');
+        return Inertia::render('Dashboard2', [
+            'name' => $post->name,
+            'locale' => $locale
+        ]);
+    })->name('dashboard2')->middleware('Lang');
 
 
 
@@ -60,6 +60,7 @@ Route::middleware([
     Route::get('/{locale}/{currentPage}', function ($locale, $currentPage) {
         $post = Post::find(1);
         App::setLocale($locale);
+        session()->put('lang',$locale);
         return Inertia::render($currentPage, [
             'name' => $post->name,
             'locale' => $locale

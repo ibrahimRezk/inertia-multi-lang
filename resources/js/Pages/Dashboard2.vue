@@ -20,22 +20,13 @@ const props = defineProps({
     locale: {
         type: String,
     },
+
 });
 
 const currentLanguage = document
     .getElementsByTagName("html")[0]
     .getAttribute("lang");
 
-// watch(
-//     () => trans("Dashboard"),
-//     () => {
-//         const lang = getActiveLanguage();
-//         const url = "/dashboard2/" + lang + "";
-//         Inertia.visit(url);
-//     }
-
-    // we can use  // Inertia.reload() or // window.location.reload(), after inertia visit   but no need here because inertia.visit do the same thing;   
-// );
 </script>
 
 <template>
@@ -57,6 +48,8 @@ const currentLanguage = document
             {{ name }}
             <br />
             {{ locale }}
+                        <br />
+
 <br />
             from handle inertia request : {{ $page.props.locale }}  <br />
 
