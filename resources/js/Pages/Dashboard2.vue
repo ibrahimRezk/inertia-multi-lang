@@ -26,16 +26,16 @@ const currentLanguage = document
     .getElementsByTagName("html")[0]
     .getAttribute("lang");
 
-watch(
-    () => trans("Dashboard"),
-    () => {
-        const lang = getActiveLanguage();
-        const url = "/dashboard2/" + lang + "";
-        Inertia.visit(url);
-    }
+// watch(
+//     () => trans("Dashboard"),
+//     () => {
+//         const lang = getActiveLanguage();
+//         const url = "/dashboard2/" + lang + "";
+//         Inertia.visit(url);
+//     }
 
     // we can use  // Inertia.reload() or // window.location.reload(), after inertia visit   but no need here because inertia.visit do the same thing;   
-);
+// );
 </script>
 
 <template>
@@ -45,13 +45,16 @@ watch(
                 <!-- {{ trans("Dashboard") }}
                 {{ wTrans("Dashboard") }} -->
                 {{ $t("Dashboard") }}
+                        <br />
+            <br />
+               {{$t('this is dashboard')}}2
             </h2>
             <br />
             <br />
             {{ currentLanguage }}
             <br />
 
-            {{  }}
+            {{ name }}
             <br />
             {{ locale }}
 <br />
@@ -62,10 +65,7 @@ watch(
 
             <br />
 
-            <button @click="loadLanguageAsync('ar')">العربية</button>
-            <br />
-            <button @click="loadLanguageAsync('en')">English</button>
-            <br /><br />
+         
             activ lang :{{ siteLang }} <br />
             arabic lang loaded :{{ loaded }}
         </template>
