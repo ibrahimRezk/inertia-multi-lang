@@ -27,6 +27,7 @@ Route::get('/home', function () {
 });
 
 Route::middleware([
+    'Lang',
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
@@ -41,7 +42,7 @@ Route::middleware([
             'name' => $post->name,
             'locale' => $locale
         ]);
-    })->name('dashboard')->middleware('Lang');
+    })->name('dashboard');
 
     Route::get('/dashboard2', function () {
         $post = Post::find(1);
@@ -52,7 +53,7 @@ Route::middleware([
             'name' => $post->name,
             'locale' => $locale
         ]);
-    })->name('dashboard2')->middleware('Lang');
+    })->name('dashboard2');
 
 
 
